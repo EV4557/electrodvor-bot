@@ -178,7 +178,7 @@ async def handle_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
         description = (
             "ELECTRODVOR — на данный момент самое свежее веяние музыкальной и развлекательной индустрии города. "
             "Абсолютно новый арт-проект, создающий уникальные ивенты в Калининграде.\n\n"
-            "... (оставьте полный текст как у вас было) ..."
+            
         )
         await update.message.reply_photo(photo=photo_url, caption=short_caption, reply_markup=main_menu)
         await update.message.reply_text(description, reply_markup=main_menu)
@@ -227,7 +227,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Запуск
 def main():
-    app = Application.builder().token("8082063845:AAEXePqi4ixBNVB95uzDbxbfbrLmSKG3Mh0").build()
+    app = Application.builder().token("8082063845:AAHBVE8__9T8pz2fPkBROq7zxiEcPF-s8X0").build()
 
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
