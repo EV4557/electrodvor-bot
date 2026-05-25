@@ -1,24 +1,30 @@
 import os
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import (
-    ApplicationBuilder, CommandHandler, MessageHandler,
+    Application, CommandHandler, MessageHandler,
     ContextTypes, filters, ConversationHandler
 )
 
 CHOOSE_ACTION, CHOOSE_EVENT, ASK_QUESTION, DETAIL_QUESTION = range(4)
 
 event_details = {
-    "НЕБОСВОД": {
-        "ссылка": "https://qtickets.ru/event/177134",
-        "цена": "🎟️ White DC — 1000₽\n💎 VIP — 1500₽\n🎩 Классика без DC — 2000₽",
-        "время": "🕖 2 августа\nНачало в 19:00, окончание в 05:00",
-        "место": "📍 Правая набережная, 9, «Браво Италия»"
+    "День города": {
+        "ссылка": "https://qtickets.ru/event/234339",
+        "цена": "🎟️ Стартовый билет — 800₽ на старте\n🎩 VIP-билет — 1500₽",
+        "время": "🕖 4 июля\nНачало в 19:00, окончание в 05:00",
+        "место": "📍 Бастион Астрономический, Гвардейский проспект 22"
     },
-    "AYAWASKA PARTY": {
-        "ссылка": "https://qtickets.ru/event/179188",
-        "цена": "🎟️ Летний стиль, яркий лук, купальники — 1000₽ на старте\n🎩 Классика — 1500₽",
-        "время": "🕖 16 августа\nНачало в 19:00, окончание в 05:00",
-        "место": "📍 Клуб “W DoubleU”, проспект Мира 31"
+    "ЦЕПРУСС": {
+        "ссылка": "https://qtickets.ru/event/236603?base_color=ffb700",
+        "цена": "🎟️ Early — 800₽ \n🧑‍🤝‍🧑 Парный 1+1\n 🎩 VIP-билет — 1300₽",
+        "время": "🕖 18 июля\nНачало в 20:00, окончание в 05:00",
+        "место": "📍 Цепрусс, Правая набережная, 22а "
+    },
+    "ТУСОВЩИКИ": {
+        "ссылка": "https://roombackstage.ru/events/electrodvor/tusovshchiki-open-eyr",
+        "цена": "🎟️ НА СТИЛЕ любой образ и чёрные очки— 500",
+        "время": "🕖 30 мая\nНачало в 22:00, окончание в 05:00",
+        "место": "📍 Каштановая аллея, 1а, «Pure»"
     }
 }
 
@@ -221,7 +227,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Запуск
 def main():
-    app = ApplicationBuilder().token(os.getenv("TELEGRAM_TOKEN")).build()
+    app = Application.builder().token("8082063845:AAEXePqi4ixBNVB95uzDbxbfbrLmSKG3Mh0").build()
 
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -236,6 +242,7 @@ def main():
 
     app.add_handler(conv)
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()
