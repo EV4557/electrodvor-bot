@@ -89,6 +89,7 @@ async def handle_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
     PRICE_KEYWORDS = ["цена", "цен", "стоимость", "сколько стоит"]
     TIME_KEYWORDS = ["время", "времен", "когда", "во сколько"]
     PLACE_KEYWORDS = ["место", "мест", "где"]
+    INFO_KEYWORDS = ["дополнительная информация"]
 
     if any(word in question for word in PRICE_KEYWORDS):
         context.user_data["question_type"] = "цена"
@@ -96,6 +97,8 @@ async def handle_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["question_type"] = "время"
     elif any(word in question for word in PLACE_KEYWORDS):
         context.user_data["question_type"] = "место"
+    elif any(word in question for word in INFO_KEYWORDS):
+        context.user_data["question_type"] = "доп. информация"
     else:
         context.user_data["fail_count"] = context.user_data.get("fail_count", 0) + 1
         if context.user_data["fail_count"] >= 2:
@@ -161,7 +164,7 @@ async def handle_action(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif text == "Ближайшие мероприятия":
         info = "\n".join(
-            f"🎉 {name}\n{event_details[name]['время']}\n{event_details[name]['место']}\n"
+            f"🎉 {name}\n{event_details[name]['время']}\n{event_details[name]['место']}\n{event_details[name]['доп. информация']}\n"
             f"Билеты: {event_details[name]['ссылка']}\n"
             for name in event_details
         )
